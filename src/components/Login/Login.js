@@ -56,21 +56,24 @@ const Login = (props) => {
     };
   }, []);
 
-  // useEffect(() => {
+  const {isValid: emailIsValid} = emailState
+  const {isValid: passwordIsValid} = passwordState
 
-  //   const identifier = setTimeout(() => {
-  //     console.log('checking form validity')
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") &&
-  //         enteredPassword.trim().length > 6 &&
-  //         enteredCollageName.includes("collage")
-  //     );
-  //   }, 5000)
-  //   return () => {
-  //     console.log("CLEANUP")
-  //     clearTimeout(identifier)
-  //   }
-  // }, [enteredEmail, enteredPassword, enteredCollageName]);
+  useEffect(() => {
+
+    const identifier = setTimeout(() => {
+      console.log('checking form validity')
+      setFormIsValid(
+          emailIsValid &&
+          passwordIsValid &&
+          enteredCollageName.includes("collage")
+      );
+    }, 5000)
+    return () => {
+      console.log("CLEANUP")
+      clearTimeout(identifier)
+    }
+  }, [emailIsValid, passwordIsValid, enteredCollageName]);
 
   const collageNameChangeHandler = (event) => {
     //console.log(event.target.value)
